@@ -1,0 +1,33 @@
+# DigitalOcean API token
+do_token = "xxx"
+
+# Resources will be prefixed with this to avoid clashing names
+prefix = "default"
+
+# Domain Name to use
+domain = "mydomain.com"
+
+# Region where server should be created
+region_server = "fra1"
+
+# Number of droplets
+nb_of_nodes = "1"
+
+# Docker version to install
+docker_version = "18.09"
+
+# Droplet sizes
+size = "s-2vcpu-4gb"
+
+# Image of host running `rancher/rancher`
+image_server = "ubuntu-18-04-x64"
+
+## User for server
+user = "ubuntu"
+
+# DigitalOcean ssh-keyid
+#ssh_keys = [ "" ]
+# Retrieve using (max 200 keys in account): `curl -s -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/account/keys?per_page=200"  | jq -r '.ssh_keys[] | select(.name=="YOUR_KEY_NAME") | .id'`
+# If you have more than 200 keys in your account, use: `doctl -t $DIGITALOCEAN_TOKEN compute ssh-key list | grep YOUR_KEY_NAME | awk '{ print $1 }'`
+# If this is not specified, you will get an email with the root password
+ssh_keys = [""]

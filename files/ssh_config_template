@@ -1,0 +1,7 @@
+%{ for index, ip in server ~}
+Host ${prefix}-droplet-${index}
+  HostName ${ip}
+  User ${user}
+  StrictHostKeyChecking no
+
+%{ endfor ~}
