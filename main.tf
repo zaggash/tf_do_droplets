@@ -51,4 +51,10 @@ output "fqdn" {
   value = [digitalocean_record.a.*.fqdn]
 }
 
+output "private-ip" {
+  value = [digitalocean_droplet.droplet.*.ipv4_address_private]
+}
 
+output "public-ip" {
+  value = [digitalocean_droplet.droplet.*.ipv4_address]
+}
