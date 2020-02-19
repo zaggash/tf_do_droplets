@@ -23,7 +23,7 @@ size = "s-2vcpu-4gb"
 image_server = "ubuntu-18-04-x64"
 
 ## User for server
-user = "ubuntu"
+user = "root"
 
 # DigitalOcean ssh-keyid
 #ssh_keys = [ "" ]
