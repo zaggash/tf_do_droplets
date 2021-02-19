@@ -1,40 +1,31 @@
+## Define variables
 variable "do_token" {
-  default = "xxx"
+  default = ""
 }
-
 variable "prefix" {
-  default = "yourname"
+  default = ""
 }
-
-
 variable "domain" {
-  default = "domain_name"
+  default = ""
 }
-
 variable "region_server" {
-  default = "lon1"
+  default = ""
 }
-
 variable "nb_of_nodes" {
-  default = "1"
+  default = ""
 }
-
 variable "docker_version" {
-  default = "18.09"
+  default = ""
 }
-
 variable "size" {
-  default = "s-2vcpu-4gb"
+  default = ""
 }
-
 variable "image_server" {
-  default = "ubuntu-18-04-x64"
+  default = ""
 }
-
 variable "user" {
-  default = "root"
+  default = ""
 }
-
 variable "ssh_keys" {
   default = []
 }
