@@ -1,6 +1,8 @@
 #!/bin/bash -x
-if [ `command -v curl` ]; then
-  curl -sL https://releases.rancher.com/install-docker/${docker_version}.sh | sh
-elif [ `command -v wget` ]; then
-  wget -qO- https://releases.rancher.com/install-docker/${docker_version}.sh | sh
+if [ -n ${docker_version} ]; then
+  if [ `command -v curl` ]; then
+    curl -sL https://releases.rancher.com/install-docker/${docker_version}.sh | sh
+  elif [ `command -v wget` ]; then
+    wget -qO- https://releases.rancher.com/install-docker/${docker_version}.sh | sh
+  fi
 fi
