@@ -7,11 +7,20 @@ resource "digitalocean_tag" "prefix" {
   name = var.prefix
 }
 
+locals {
+  droplets_fqdn = formatlist("%s.%s.sslip.io", digitalocean_droplet.droplet.*.name, digitalocean_droplet.droplet.*.ipv4_address)
+}
+
+resource "digitalocean_vpc" "droplets-network" {
+  name        = "${var.prefix}-droplets-vpc"
+  region      = var.region_server
+}
+
 resource "digitalocean_droplet" "droplet" {
   count              = var.nb_of_nodes
   image              = var.image_server
   name               = "${var.prefix}-droplet-${count.index}"
-  private_networking = true
+  vpc_uuid           = digitalocean_vpc.droplets-network.id
   region             = var.region_server
   size               = var.size
   user_data          = data.template_file.userdata_droplet.rendered
@@ -26,16 +35,6 @@ data "template_file" "userdata_droplet" {
   }
 }
 
-
-resource "digitalocean_record" "a" {
-  count  = var.nb_of_nodes
-  domain = var.domain
-  type   = "A"
-  name   = element(digitalocean_droplet.droplet.*.name, count.index)
-  value  = element(digitalocean_droplet.droplet.*.ipv4_address, count.index)
-  ttl    = 30
-}
-
 resource "local_file" "ssh_config" {
   content = templatefile("${path.module}/files/ssh_config_template", {
     prefix = var.prefix
@@ -45,10 +44,9 @@ resource "local_file" "ssh_config" {
   filename = "${path.module}/ssh_config"
 }
 
-
 # Output the FQDN for the record
 output "fqdn" {
-  value = [digitalocean_record.a.*.fqdn]
+  value = local.droplets_fqdn
 }
 
 output "private-ip" {
