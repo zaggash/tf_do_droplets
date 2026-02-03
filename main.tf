@@ -8,7 +8,7 @@ resource "digitalocean_tag" "prefix" {
 }
 
 locals {
-  droplets_fqdn = formatlist("%s.%s.sslip.io", digitalocean_droplet.droplet.*.name, digitalocean_droplet.droplet.*.ipv4_address)
+  droplets_fqdn = formatlist("%s-%s.sslip.io", digitalocean_droplet.droplet.*.name, digitalocean_droplet.droplet.*.ipv4_address)
 }
 
 resource "digitalocean_vpc" "droplets-network" {
